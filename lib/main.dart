@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/views/screen/auth/login.dart';
+import 'package:notes_app/views/screen/auth/verify_email_address.dart';
 
 import 'controller/firebase_auth.dart';
 import 'firebase_options.dart';
@@ -27,8 +28,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme: ThemeData(
+          useMaterial3: false,
+          appBarTheme: AppBarTheme(
+            color: Colors.white,
+            elevation: 0,
+            iconTheme: IconThemeData(color: Colors.black),
+          )),
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: VerifyEmailAddress(),
     );
   }
 }

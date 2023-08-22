@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:notes_app/controller/firebase_auth.dart';
 import 'package:notes_app/views/screen/auth/signup.dart';
 
+import '../home.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -20,9 +22,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
+    // Inside your build method
+    if (isLoading) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -216,7 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
 
-            // google and facebook  buttons
+            // google and github  buttons
             Container(
               margin: const EdgeInsets.only(top: 35.0),
               child: Row(
@@ -227,7 +237,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: MediaQuery.of(context).size.width * 0.4,
                     height: 50.0,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        isLoading = true;
+                        Auth.instance.signInWithGoogle().then((value) {
+                          Get.snackbar('Login Successful',
+                              'You have successfully logged in');
+                          isLoading = false;
+                          Get.off(HomeScreen());
+                        });
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -251,24 +269,34 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 15.0,
                   ),
 
-                  // Facebook Outlined Button
+                  // GitHub Outlined Button
                   Container(
                     width: MediaQuery.of(context).size.width * 0.4,
                     height: 50.0,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      // style: ButtonStyle(
+                      // shape: MaterialStatePropertyAll(
+                      //     ContinuousRectangleBorder(
+                      //         side: BorderSide(color: Colors.green)))),
+                      onPressed: () {
+                        Auth.instance.githubAuth(context).then((value) {
+                          Get.snackbar('Login Successful',
+                              'You have successfully logged in');
+                          Get.off(HomeScreen());
+                        });
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset(
-                            'assets/images/facebook.png',
+                            'assets/images/github.png',
                             height: 30,
                           ),
                           const SizedBox(
                             width: 10.0,
                           ),
                           const Text(
-                            'Facebook',
+                            'GitHub',
                             style:
                                 TextStyle(fontSize: 20.0, color: Colors.black),
                           ),

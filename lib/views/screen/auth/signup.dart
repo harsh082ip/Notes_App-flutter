@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/controller/firebase_auth.dart';
 import 'package:notes_app/views/screen/auth/login.dart';
+import 'package:notes_app/views/screen/home.dart';
 
 class SignUp_Screen extends StatefulWidget {
   const SignUp_Screen({super.key});
@@ -220,7 +221,7 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
               ),
             ),
 
-            // google and facebook  buttons
+            // google and github  buttons
             Container(
               margin: const EdgeInsets.only(top: 15.0),
               child: Row(
@@ -231,7 +232,12 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                     width: MediaQuery.of(context).size.width * 0.4,
                     height: 50.0,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Auth.instance.signInWithGoogle().then((value) {
+                          Get.snackbar('Congrats', 'SignUp Successful');
+                          Get.off(HomeScreen());
+                        });
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -255,24 +261,29 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                     width: 15.0,
                   ),
 
-                  // Facebook Outlined Button
+                  // GitHub Outlined Button
                   Container(
                     width: MediaQuery.of(context).size.width * 0.4,
                     height: 50.0,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Auth.instance.githubAuth(context).then((value) {
+                          Get.snackbar('Congrats', 'SignUp Successful');
+                          Get.off(HomeScreen());
+                        });
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset(
-                            'assets/images/facebook.png',
+                            'assets/images/github.png',
                             height: 30,
                           ),
                           const SizedBox(
                             width: 10.0,
                           ),
                           const Text(
-                            'Facebook',
+                            'GitHub',
                             style:
                                 TextStyle(fontSize: 20.0, color: Colors.black),
                           ),
