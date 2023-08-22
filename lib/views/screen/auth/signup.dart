@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes_app/views/screen/auth/signup.dart';
+import 'package:notes_app/views/screen/auth/login.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUp_Screen extends StatefulWidget {
+  const SignUp_Screen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUp_Screen> createState() => _SignUp_ScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUp_ScreenState extends State<SignUp_Screen> {
   bool isobscureText = true;
   void toggleobscure() {
     setState(() {
@@ -41,36 +41,23 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 // top container text 1
                 const Positioned(
-                  bottom: 160,
+                  bottom: 120,
                   left: 15,
                   child: Text(
-                    'Sign in to your',
+                    'Register',
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 45.0,
+                        fontSize: 60.0,
                         fontFamily: 'ADLaMDisplay'),
                   ),
                 ),
 
                 // top container text 2
                 const Positioned(
-                  bottom: 110,
+                  bottom: 80,
                   left: 15,
                   child: Text(
-                    'Account',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 45.0,
-                        fontFamily: 'ADLaMDisplay'),
-                  ),
-                ),
-
-                // top container text 3
-                const Positioned(
-                  bottom: 60,
-                  left: 15,
-                  child: Text(
-                    'Sign in to your account',
+                    'Register your account',
                     style: TextStyle(
                         color: Colors.grey,
                         fontSize: 18.0,
@@ -82,7 +69,21 @@ class _LoginScreenState extends State<LoginScreen> {
 
             // Email Text field with validator
             Container(
-              margin: EdgeInsets.only(left: 15, right: 15, top: 55.0),
+              margin: EdgeInsets.only(left: 15, right: 15, top: 30.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'John Fernendez',
+                  labelText: 'Full Name',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            ),
+
+            // Email Text field with validator
+            Container(
+              margin: EdgeInsets.only(top: 22.0, left: 15.0, right: 15.0),
               child: TextFormField(
                   decoration: InputDecoration(
                     hintText: 'abc@yahoo.com',
@@ -162,14 +163,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     backgroundColor: const Color.fromARGB(255, 192, 232, 99)),
                 onPressed: () {},
                 child: const Text(
-                  'Login',
+                  'Sign Up',
                   style: TextStyle(
                       color: Color.fromARGB(255, 69, 69, 69), fontSize: 25.0),
                 ),
               ),
             ),
+
             Container(
-              margin: const EdgeInsets.only(top: 25.0),
+              margin: const EdgeInsets.only(top: 18.0),
               child: Row(
                 children: [
                   Container(
@@ -179,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Colors.black,
                       thickness: 0.6,
                       indent: 20,
-                      endIndent: 0,
+                      endIndent: 10,
                     ),
                   ),
 
@@ -189,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: MediaQuery.of(context).size.width * 0.33,
                     child: const Center(
                         child: Text(
-                      'or login with',
+                      'or sign up with',
                       style: TextStyle(fontSize: 20.0),
                     )),
                   ),
@@ -209,7 +211,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
             // google and facebook  buttons
             Container(
-              margin: const EdgeInsets.only(top: 35.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -272,14 +274,14 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
 
             // Register here text
-            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
             Container(
               width: MediaQuery.of(context).size.width,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Don\'t have an account?',
+                    'Already have an account?',
                     style: TextStyle(fontSize: 18.0),
                   ),
                   const SizedBox(
@@ -287,10 +289,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.off(SignUp_Screen());
+                      Get.off(LoginScreen());
                     },
                     child: const Text(
-                      'Register',
+                      'Login here',
                       style: TextStyle(
                           color: Color.fromARGB(255, 17, 255, 0),
                           fontSize: 18.0),
