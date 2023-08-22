@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:notes_app/controller/firebase_auth.dart';
 import 'package:notes_app/views/screen/auth/signup.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -16,6 +17,9 @@ class _LoginScreenState extends State<LoginScreen> {
       isobscureText = !isobscureText;
     });
   }
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               margin: EdgeInsets.only(left: 15, right: 15, top: 55.0),
               child: TextFormField(
+                  controller: emailController,
                   decoration: InputDecoration(
                     hintText: 'abc@yahoo.com',
                     labelText: 'Email',
@@ -108,6 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               margin: EdgeInsets.only(top: 22.0, left: 15.0, right: 15.0),
               child: TextFormField(
+                controller: passwordController,
                 obscureText: isobscureText,
                 decoration: InputDecoration(
                     suffixIcon: IconButton(
@@ -160,7 +166,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     shape: ContinuousRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0)),
                     backgroundColor: const Color.fromARGB(255, 192, 232, 99)),
-                onPressed: () {},
+                onPressed: () {
+                  Auth.instance
+                      .login(emailController.text, passwordController.text);
+                },
                 child: const Text(
                   'Login',
                   style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:notes_app/controller/firebase_auth.dart';
 import 'package:notes_app/views/screen/auth/login.dart';
 
 class SignUp_Screen extends StatefulWidget {
@@ -16,6 +17,10 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
       isobscureText = !isobscureText;
     });
   }
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +76,7 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
             Container(
               margin: EdgeInsets.only(left: 15, right: 15, top: 30.0),
               child: TextFormField(
+                controller: nameController,
                 decoration: InputDecoration(
                   hintText: 'John Fernendez',
                   labelText: 'Full Name',
@@ -85,6 +91,7 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
             Container(
               margin: EdgeInsets.only(top: 22.0, left: 15.0, right: 15.0),
               child: TextFormField(
+                  controller: emailController,
                   decoration: InputDecoration(
                     hintText: 'abc@yahoo.com',
                     labelText: 'Email',
@@ -109,6 +116,7 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
             Container(
               margin: EdgeInsets.only(top: 22.0, left: 15.0, right: 15.0),
               child: TextFormField(
+                controller: passwordController,
                 obscureText: isobscureText,
                 decoration: InputDecoration(
                     suffixIcon: IconButton(
@@ -151,7 +159,7 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
               ),
             ),
 
-            // Login Elevated Button
+            // SignUp Elevated Button
             Container(
               margin: const EdgeInsets.only(top: 30.0),
               width: MediaQuery.of(context).size.width * 0.9,
@@ -161,7 +169,10 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                     shape: ContinuousRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0)),
                     backgroundColor: const Color.fromARGB(255, 192, 232, 99)),
-                onPressed: () {},
+                onPressed: () {
+                  Auth.instance.SignUp(nameController.text,
+                      emailController.text, passwordController.text);
+                },
                 child: const Text(
                   'Sign Up',
                   style: TextStyle(
