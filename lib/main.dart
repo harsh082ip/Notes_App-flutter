@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
             iconTheme: IconThemeData(color: Colors.black),
           )),
       debugShowCheckedModeBanner: false,
-      home: VerifyEmailAddress(),
+      home: LoginScreen(),
     );
   }
 }

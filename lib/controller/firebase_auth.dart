@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:github_sign_in_plus/github_sign_in_plus.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:notes_app/models/users.dart';
+import 'package:notes_app/views/screen/auth/verify_email_address.dart';
 import 'package:notes_app/views/screen/home.dart';
 
 class Auth extends GetxController {
@@ -28,7 +29,7 @@ class Auth extends GetxController {
             .set(myuser.toJson())
             .then((value) {
           Get.snackbar('SignUp Successful', 'You have signed up successfully');
-          Get.off(HomeScreen());
+          Get.off(VerifyEmailAddress());
         });
       } else {
         Get.snackbar('Incomplete Details', 'Fill all the required fields');
@@ -99,6 +100,8 @@ class Auth extends GetxController {
   //     Get.snackbar('Some Error Occured', e.toString());
   //   }
   // }
+
+  //Github Auth
   Future<UserCredential?> githubAuth(BuildContext context) async {
     try {
       final GitHubSignIn gitHubSignIn = GitHubSignIn(
@@ -123,6 +126,16 @@ class Auth extends GetxController {
       log(e.toString());
       Get.snackbar('Some Error Occurred', e.toString());
       return null;
+    }
+  }
+
+  // email verification
+  Future sendVerificationLink() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser!;
+      await user.sendEmailVerification();
+    } catch (e) {
+      Get.snackbar('Error', 'Some Error Occured');
     }
   }
 }
