@@ -29,7 +29,7 @@ class _VerifyEmailAddressState extends State<VerifyEmailAddress> {
         (_) => checkEmailVerified(),
       );
     } else {
-      Get.to(const HomeScreen());
+      Get.off(const HomeScreen());
     }
   }
 

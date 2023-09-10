@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/controller/firebase_auth.dart';
+import 'package:notes_app/views/screen/auth/forget_screen.dart';
 import 'package:notes_app/views/screen/auth/signup.dart';
 
 import '../home.dart';
@@ -155,7 +156,9 @@ class _LoginScreenState extends State<LoginScreen> {
               margin: const EdgeInsets.only(right: 15, top: 20.0),
               alignment: Alignment.topRight,
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  Get.to(ForgetPassword_Screen());
+                },
                 child: const Text(
                   'Forget Password?',
                   style: TextStyle(

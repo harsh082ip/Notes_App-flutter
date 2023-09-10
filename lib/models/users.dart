@@ -11,10 +11,12 @@ class MyUser {
     required this.uid,
   });
 
+  // app ---> firebase
   Map<String, dynamic> toJson() {
     return {'name': name, 'email': email, 'uid': uid};
   }
 
+  // firebasee ----> app
   static MyUser fromSnap(DocumentSnapshot snap) {
     var snapshots = snap.data() as Map<String, dynamic>;
 
