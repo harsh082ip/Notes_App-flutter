@@ -27,4 +27,9 @@ class NotesController {
       Get.snackbar('Error', e.toString());
     }
   }
+
+  // get snapshots
+  static Stream<QuerySnapshot> itemStream() {
+    return FirebaseFirestore.instance.collection('notes').snapshots();
+  }
 }
