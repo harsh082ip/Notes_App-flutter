@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:github_sign_in_plus/github_sign_in_plus.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:notes_app/models/users.dart';
+import 'package:notes_app/views/screen/auth/login.dart';
 import 'package:notes_app/views/screen/auth/verify_email_address.dart';
 import 'package:notes_app/views/screen/home.dart';
 
@@ -136,6 +137,17 @@ class Auth extends GetxController {
       await user.sendEmailVerification();
     } catch (e) {
       Get.snackbar('Error', 'Some Error Occured');
+    }
+  }
+
+  // logout user
+  void logout() async {
+    try {
+      await FirebaseAuth.instance.signOut().then((value) {
+        Get.offAll(LoginScreen());
+      });
+    } catch (e) {
+      Get.snackbar('Error logging out', e.toString());
     }
   }
 }

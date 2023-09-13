@@ -1,17 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:notes_app/controller/notes_controller.dart';
+import 'package:notes_app/views/screen/home.dart';
 
-class AddNotes extends StatefulWidget {
-  const AddNotes({super.key});
+class EditNotes_Screen extends StatefulWidget {
+  String title;
+  String desc;
+  String docID;
+  EditNotes_Screen(
+      {super.key,
+      required this.title,
+      required this.desc,
+      required this.docID});
 
   @override
-  State<AddNotes> createState() => _AddNotesState();
+  State<EditNotes_Screen> createState() => _EditNotes_ScreenState();
 }
 
-class _AddNotesState extends State<AddNotes> {
+class _EditNotes_ScreenState extends State<EditNotes_Screen> {
   FocusNode myFocusNode = FocusNode();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descController = TextEditingController();
+  // String myString = "Hello, World!";
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    titleController.text = widget.title;
+    descController.text = widget.desc;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,8 +49,8 @@ class _AddNotesState extends State<AddNotes> {
         actions: [
           IconButton(
             onPressed: () {
-              NotesController.addNotes(
-                  titleController.text, descController.text);
+              NotesController.updateDocs(
+                  titleController.text, descController.text, widget.docID);
             },
             icon: const Icon(
               Icons.check,
@@ -49,7 +67,8 @@ class _AddNotesState extends State<AddNotes> {
             margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 25.0),
             child: Form(
                 child: Column(children: [
-              TextField(
+              TextFormField(
+                // initialValue: widget.title,
                 controller: titleController,
                 textInputAction: TextInputAction.newline,
                 maxLines: null,
@@ -71,7 +90,8 @@ class _AddNotesState extends State<AddNotes> {
               const SizedBox(
                 height: 20.0,
               ),
-              TextField(
+              TextFormField(
+                // initialValue: widget.desc,
                 controller: descController,
                 focusNode: myFocusNode,
                 textInputAction: TextInputAction.newline,
